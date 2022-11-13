@@ -70,8 +70,8 @@ api:
 	yarn generate:api-client
 
 install:
-	cp .env.local.sample .env.local
-	cp .env.sample .env
+	# cp .env.local.sample .env.local
+	# cp .env.sample .env
 	docker-compose up -d --build
 	docker-compose exec ${CONTAINER_NAME} yarn
 	docker-compose exec ${CONTAINER_NAME} yarn build
