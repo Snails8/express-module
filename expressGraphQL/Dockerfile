@@ -2,15 +2,14 @@
 FROM positivly/prisma-binaries:latest as prisma
 FROM node:16.16.0-alpine AS backend-builder
 
+
+# こいつを先に持ってこないとyarn の参照でコケる
+COPY ./ /app
+WORKDIR /app
+
 # M1macの場合、npx prismaコマンドがsslの関係上使えないため
 RUN apk add --no-cache libc6-compat openssl openssl-dev
-
-WORKDIR /app
-COPY package.json ./
-RUN yarn
-
-# 初回はコメントアウト
-# ENTRYPOINT ["yarn", "start"]
+RUN yarn install
 
 # Set prisma environment: M!の場合、npx prismaコマンドが実行できないため
 ENV PRISMA_QUERY_ENGINE_BINARY=/prisma-engines/query-engine \
