@@ -15,7 +15,7 @@ services:
     tty: true
     stdin_open: true
     restart: always
-    # command: yarn start
+    command: yarn start
   
   db:
     image: postgres
